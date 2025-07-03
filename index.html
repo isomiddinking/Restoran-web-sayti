@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Vista Restorani</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="restaurant-info">
+                    <h1>Bella Vista Restorani</h1>
+                    <p>Yuqori sifatli taomlar va mukammal xizmat</p>
+                </div>
+                <div class="daily-visitors">
+                    <p>Bugungi mehmonlar:</p>
+                    <span id="visitorsCount">0</span>
+                </div>
+            </div>
+
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Stol tanlash</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Taomlar tanlash</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Bron ma'lumotlari</span>
+                </div>
+                <div class="step" data-step="4">
+                    <span class="step-number">4</span>
+                    <span class="step-label">To'lov</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section id="step1" class="step-content active">
+                <div class="section-header">
+                    <h2>Stolingizni tanlang</h2>
+                    <p>Ovqatlanish uchun mavjud stollardan birini tanlang</p>
+                </div>
+
+                <div class="table-selection">
+                    <h3>Restoran rejasi</h3>
+                    <div class="restaurant-floor">
+                        <div class="table" data-table="1" data-seats="2">
+                            <span class="table-number">1</span>
+                            <span class="table-seats">2 o'rin</span>
+                        </div>
+                        <div class="table" data-table="2" data-seats="4">
+                            <span class="table-number">2</span>
+                            <span class="table-seats">4 o'rin</span>
+                        </div>
+                        <div class="table unavailable" data-table="3" data-seats="2">
+                            <span class="table-number">3</span>
+                            <span class="table-seats">2 o'rin</span>
+                        </div>
+                        <div class="table" data-table="4" data-seats="6">
+                            <span class="table-number">4</span>
+                            <span class="table-seats">6 o'rin</span>
+                        </div>
+                        <div class="table" data-table="5" data-seats="4">
+                            <span class="table-number">5</span>
+                            <span class="table-seats">4 o'rin</span>
+                        </div>
+                        <div class="table unavailable" data-table="6" data-seats="8">
+                            <span class="table-number">6</span>
+                            <span class="table-seats">8 o'rin</span>
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <h4>Belgilar</h4>
+                        <div class="legend-item">
+                            <div class="legend-color available"></div>
+                            <span>Bo'sh</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color selected"></div>
+                            <span>Tanlangan</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color unavailable"></div>
+                            <span>Band</span>
+                        </div>
+                    </div>
+
+                    <button id="nextToMenu" class="btn btn-primary" disabled>Menyuga o'tish</button>
+                </div>
+            </section>
+
+            <section id="step2" class="step-content">
+                <div class="menu-container">
+                    <div class="menu-section">
+                        <div class="section-header">
+                            <h2>Menyumiz</h2>
+                            <p>Eng yaxshi taomlarni tanlang</p>
+                        </div>
+
+                        <div class="search-bar">
+                            <input type="text" id="menuSearchInput" placeholder="Taomlarni qidirish ">
+                        </div>
+
+                        <div id="chefPanel" class="chef-panel hidden">
+                            <div id="addDishForm" class="add-dish-form hidden">
+                                <h3>Yangi taom qo'shish</h3>
+                                <div class="form-group">
+                                    <label for="dishName">Taom nomi:</label>
+                                    <input type="text" id="dishName" placeholder="Taom nomi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dishDescription">Ta'rif:</label>
+                                    <textarea id="dishDescription" placeholder="Ta'rif" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dishPrice">Narx (so'm):</label>
+                                    <input type="number" id="dishPrice" placeholder="Narx (so'm)" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dishCategory">Kategoriya:</label>
+                                    <select id="dishCategory">
+                                        <option value="appetizers">Salqin taomlar</option>
+                                        <option value="mains">Asosiy taomlar</option>
+                                        <option value="desserts">Shirinliklar</option>
+                                        <option value="drinks">Ichimliklar</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dishImage">Rasm URL (ixtiyoriy):</label>
+                                    <input type="url" id="dishImage" placeholder="Rasm URL">
+                                </div>
+                                <button id="addDishBtn" class="btn btn-primary">Qo'shish</button>
+                            </div>
+
+                            <div id="editDishForm" class="add-dish-form hidden">
+                                <h3>Taomni tahrirlash</h3>
+                                <input type="hidden" id="editDishId">
+                                <div class="form-group">
+                                    <label for="editDishName">Taom nomi:</label>
+                                    <input type="text" id="editDishName" placeholder="Taom nomi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDishDescription">Ta'rif:</label>
+                                    <textarea id="editDishDescription" placeholder="Ta'rif" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDishPrice">Narx (so'm):</label>
+                                    <input type="number" id="editDishPrice" placeholder="Narx (so'm)" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDishCategory">Kategoriya:</label>
+                                    <select id="editDishCategory">
+                                        <option value="appetizers">Salqin taomlar</option>
+                                        <option value="mains">Asosiy taomlar</option>
+                                        <option value="desserts">Shirinliklar</option>
+                                        <option value="drinks">Ichimliklar</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDishImage">Rasm URL (ixtiyoriy):</label>
+                                    <input type="url" id="editDishImage" placeholder="Rasm URL">
+                                </div>
+                                <button id="saveEditedDishBtn" class="btn btn-success">Saqlash</button>
+                                <button id="cancelEditDishBtn" class="btn btn-secondary">Bekor qilish</button>
+                            </div>
+                        </div>
+
+
+                        <div class="menu-categories">
+                            <button class="category-btn active" data-category="appetizers">Salqin taomlar</button>
+                            <button class="category-btn" data-category="mains">Asosiy taomlar</button>
+                            <button class="category-btn" data-category="desserts">Shirinliklar</button>
+                            <button class="category-btn" data-category="drinks">Ichimliklar</button>
+                        </div>
+
+                        <div id="menuItems" class="menu-items"></div>
+                    </div>
+
+                    <div class="cart-section">
+                        <div class="cart">
+                            <h3>Sizning buyurtmangiz</h3>
+                            <div id="cartItems" class="cart-items"></div>
+                            <div class="cart-total">
+                                <strong>Jami: <span id="totalAmount">0</span> so'm</strong>
+                            </div>
+                            <button id="proceedToDetails" class="btn btn-primary" disabled>Bron ma'lumotlariga o'tish</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="step3" class="step-content">
+                <div class="reservation-form">
+                    <h2>Bron ma'lumotlari</h2>
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="customerName">Ism familiya:</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Telefon raqam:</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email:</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reservationDate">Sana:</label>
+                            <input type="date" id="reservationDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reservationTime">Vaqt:</label>
+                            <input type="time" id="reservationTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestCount">Mehmonlar soni:</label>
+                            <input type="number" id="guestCount" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequests">Maxsus so'rovlar:</label>
+                            <textarea id="specialRequests" placeholder="Qo'shimcha ma'lumotlar..."></textarea>
+                        </div>
+
+                        <div class="reservation-summary">
+                            <h3>Bron xulosasi</h3>
+                            <p><strong>Stol:</strong> <span id="selectedTableInfo"></span></p>
+                            <p><strong>Jami summa:</strong> <span id="summaryTotal"></span> so'm</p>
+                        </div>
+
+                        <button type="button" id="proceedToPayment" class="btn btn-primary">To'lovga o'tish</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="step4" class="step-content">
+                <div class="payment-section">
+                    <h2>To'lov</h2>
+                    <div class="payment-methods">
+                        <h3>To'lov usulini tanlang</h3>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cash">
+                                <span>Naqd pul</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card">
+                                <span>Plastik karta</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="online">
+                                <span>Online to'lov</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="final-summary">
+                        <h3>Yakuniy hisob</h3>
+                        <div id="finalOrderSummary"></div>
+                        <div class="total-amount">
+                            <strong>Umumiy summa: <span id="finalTotal"></span> so'm</strong>
+                        </div>
+                    </div>
+
+                    <button id="confirmOrder" class="btn btn-success">Buyurtmani tasdiqlash</button>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
