@@ -98,8 +98,6 @@ function saveMenuData() {
 }
 
 function setupEventListeners() {
-    // "Bron qilish" (step1) bo'limi uchun event listener olib tashlandi
-
     // Step 2: Proceed from menu to order details
     document.getElementById('proceedToDetails').addEventListener('click', () => goToStep('step3'));
 
